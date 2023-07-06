@@ -16,7 +16,6 @@
 const int p = 998244353, G = 3, Gi = 332748118;//G是原根，Gi是G的除法逆元
 const int N = 5e5+10;
 
-const double PI = acos(-1);
 
 int n, m;
 int res, ans[N];
@@ -45,9 +44,9 @@ void NTT(ll *A, int type)//1转点值，-1转系数
         if(i < RR[i])
             swap(A[i], A[RR[i]]);
     for(int mid = 1; mid < limit; mid <<= 1) {//原根代替单位根
+        //ll wn = qpow(type == 1 ? G : Gi, (p - 1) / (mid << 1));
         ll wn = qpow(G, (p - 1) / (mid * 2));
-        if(type == -1) wn = qpow(wn, p - 2);
-        //逆变换则乘上逆元,因为我们算出来的公式中逆变换是(a^-ij)，也就是(a^ij)的逆元
+        
         for(int len = mid << 1, pos = 0; pos < limit; pos += len) {
             ll w = 1;
             for(int k = 0; k < mid; ++ k, w = (w * wn) % p) {
@@ -61,6 +60,7 @@ void NTT(ll *A, int type)//1转点值，-1转系数
 
     if(type == -1) {
         ll limit_inv = inv(limit);//N的逆元（N是limit, 指的是2的整数幂）
+        for (int i = 1; i < limit / 2; i ++)swap(A[i], A[limit - i]);
         for(int i = 0; i < limit; ++ i)
             A[i] = (A[i] * limit_inv) % p;//NTT还是要除以n的，但是这里把除换成逆元了，inv就是n在模p意义下的逆元
     }

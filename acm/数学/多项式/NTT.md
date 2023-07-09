@@ -153,6 +153,19 @@ namespace Poly
         C.resize(deg);
         return C;
     }
+    
+    poly poly_mul(poly A, poly B, int deg) {//多项式乘法
+        int limit = NTT_init(deg);
+        poly C(limit);
+        NTT(A, 1, limit);
+        NTT(B, 1, limit);
+        for(int i = 0; i < limit; ++ i)
+            C[i] = 1ll * A[i] * B[i] % mod;
+        NTT(C, 0, limit);
+        C.resize(deg);
+        return C;
+    }
+    
 }
 
 using Poly::poly;

@@ -90,12 +90,12 @@ Complex operator - (Complex J, Complex Q) {
 Complex operator + (Complex J, Complex Q) {
     return Complex(J.x + Q.x, J.y + Q.y);
 }
-for (int i = 0; i <= Lim; ++ i) {
+//for (int i = 0; i <= Lim; ++ i) {
     //换成二进制序列
-    R[i] = (R[i >> 1] >> 1) | ((i & 1) << (L - 1));
+    //R[i] = (R[i >> 1] >> 1) | ((i & 1) << (L - 1));
     // 在原序列中 i 与 i/2 的关系是 ： i可以看做是i/2的二进制上的每一位左移一位得来
     // 那么在反转后的数组中就需要右移一位，同时特殊处理一下奇数
-}
+//}
 
 inline void FFT(Complex *J, double type)//1 转点值，-1 转系数
 {
